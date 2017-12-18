@@ -6,9 +6,15 @@
 
 #include "jvm_cli.h"
 #include "load_class.h"
+#include "log.h"
 using namespace std;
 
 int main(int argc, char *argv[]) {
+
+  JLog log;
+
+  log.error("test 123");
+
 
   jvmArgsParse *para = new jvmArgsParse();
 

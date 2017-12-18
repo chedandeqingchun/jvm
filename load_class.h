@@ -3,28 +3,25 @@
 #include <iostream>
 
 class classEntry {
+private:
 public:
     int magic;
     int16_t minor_number;
     int16_t major_number;
     int16_t const_poll_count;
-    int32_t const_poll[const_poll_count - 1]; 
+    //int32_t const_poll[const_poll_count - 1]; 
+    int32_t *const_poll;
     int16_t access_flags;
     int16_t this_class;
     int16_t super_class;
     int16_t interface_count;
-    int16_t interfaces[interface_count - 1];
-
-    
-
-
-
-
-
-
+    //int16_t interfaces[interface_count - 1];
+    int16_t *interfaces;
+public:
+    classEntry();
+    ~classEntry();
 
 };
-
 
 class classLoader {
 
