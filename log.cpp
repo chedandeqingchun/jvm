@@ -29,32 +29,32 @@ int JLog::initLog() {
     return 0;
 }
 
-void JLog::debug(const char *fmt, ...) {
+void JLog::debug(std::string fileName, std::string funcName, std::string lineNum, const char *fmt, ...) {
 
     std::string str;
     str += "[DEBUG]";
-    str = str + " " + __FILE__;
-    str = str + " " + __func__;
-    str = str + " " + std::to_string(__LINE__);
-    str = str + fmt;
-    str = str + "\n";
+    str = str + " " + fileName;
+    str = str + ":" + funcName;
+    str = str + " " + lineNum;
+    str = str + " " + " " + fmt;
+    str = str + " " + "\n";
 
     va_list args;
     va_start(args, fmt);
     this->basePrint(str.c_str(), args);
     va_end(args);
-
 }
 
-void JLog::info(const char *fmt, ...) {
+void JLog::info(std::string fileName, std::string funcName, std::string lineNum, const char *fmt, ...) {
 
     std::string str;
     str += "[INFO]";
-    str = str + " " + __FILE__;
-    str = str + " " + __func__;
-    str = str + " " + std::to_string(__LINE__);
-    str = str + fmt;
-    str = str + "\n";
+    str = str + " " + fileName;
+    str = str + ":" + funcName;
+    str = str + " " + lineNum;
+    str = str + " " + " " + fmt;
+    str = str + " " + "\n";
+
 
     va_list args;
     va_start(args, fmt);
@@ -63,15 +63,16 @@ void JLog::info(const char *fmt, ...) {
 
 }
 
-void JLog::warning(const char *fmt, ...) {
+void JLog::warning(std::string fileName, std::string funcName, std::string lineNum, const char *fmt, ...) {
 
     std::string str;
     str += "[WARN]";
-    str = str + " " + __FILE__;
-    str = str + " " + __func__;
-    str = str + " " + std::to_string(__LINE__);
-    str = str + " " + fmt;
-    str = str + "\n";
+    str = str + " " + fileName;
+    str = str + ":" + funcName;
+    str = str + " " + lineNum;
+    str = str + " " + " " + fmt;
+    str = str + " " + "\n";
+
 
     va_list args;
     va_start(args, fmt);
@@ -80,15 +81,16 @@ void JLog::warning(const char *fmt, ...) {
 
 }
 
-void JLog::error(const char *fmt, ...) {
+void JLog::error(std::string fileName, std::string funcName, std::string lineNum, const char *fmt, ...) {
 
     std::string str;
     str += "[ERROR]";
-    str = str + " " + __FILE__;
-    str = str + " " + __func__;
-    str = str + " " + std::to_string(__LINE__);
-    str = str + " " + fmt;
-    str = str + "\n";
+    str = str + " " + fileName;
+    str = str + ":" + funcName;
+    str = str + " " + lineNum;
+    str = str + " " + " " + fmt;
+    str = str + " " + "\n";
+
     
     va_list args;
     va_start(args, fmt);
@@ -97,13 +99,13 @@ void JLog::error(const char *fmt, ...) {
 
 }
 
-void JLog::fatal(const char *fmt, ...) {
+void JLog::fatal(std::string fileName, std::string funcName, std::string lineNum, const char *fmt, ...) {
 
     std::string str;
     str += "[FATAL]";
-    str = str + " " + __FILE__;
-    str = str + " " + __func__;
-    str = str + " " + std::to_string(__LINE__);
+    str = str + " " + fileName;
+    str = str + ":" + funcName;
+    str = str + " " + lineNum;
     str = str + " " + fmt;
     str = str + "\n";
 
@@ -113,3 +115,6 @@ void JLog::fatal(const char *fmt, ...) {
     va_end(args);
 
 }
+
+
+

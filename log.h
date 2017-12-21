@@ -35,12 +35,21 @@ public:
 
 
 public:
-    void debug(const char *fmt, ...);
-    void info(const char *fmt, ...);
-    void warning(const char *fmt, ...);
-    void error(const char *fmt, ...);
-    void fatal(const char *fmt, ...);
+    void debug(std::string fileName, std::string funcName, std::string lineNum, const char *fmt, ...);
+    void info(std::string fileName, std::string funcName, std::string lineNum, const char *fmt, ...);
+    void warning(std::string fileName, std::string funcName, std::string lineNum, const char *fmt, ...);
+    void error(std::string fileName, std::string funcName, std::string lineNum, const char *fmt, ...);
+    void fatal(std::string fileName, std::string funcName, std::string lineNum, const char *fmt, ...);
+
     int setLogLevel(LogLevel level);
 };
+
+extern JLog log;
+
+#define JDebug(fmt, ...)  log.debug(__FILE__, __func__, std::to_string(__LINE__), ##__VA_ARGS__);
+#define JInfo(fmt, ...)  log.info(__FILE__, __func__, std::to_string(__LINE__), ##__VA_ARGS__);
+#define JFatal(fmt, ...)  log.fatal(__FILE__, __func__, std::to_string(__LINE__), ##__VA_ARGS__);
+#define JWarn(fmt, ...)  log.warning(__FILE__, __func__, std::to_string(__LINE__), ##__VA_ARGS__);
+#define JError(fmt, ...)  log.error(__FILE__, __func__, std::to_string(__LINE__), ##__VA_ARGS__);
 
 #endif

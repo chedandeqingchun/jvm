@@ -9,13 +9,11 @@
 #include "log.h"
 using namespace std;
 
+JLog log;
+
 int main(int argc, char *argv[]) {
-
-  JLog log;
-
-  log.error("test 123");
-
-
+  JDebug("%s xxxx", "hahaha");
+  
   jvmArgsParse *para = new jvmArgsParse();
 
   if (!para) {
