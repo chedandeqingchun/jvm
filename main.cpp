@@ -12,7 +12,6 @@ using namespace std;
 JLog log;
 
 int main(int argc, char *argv[]) {
-  JDebug("%s xxxx", "hahaha");
   
   jvmArgsParse *para = new jvmArgsParse();
 

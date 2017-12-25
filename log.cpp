@@ -12,20 +12,18 @@ JLog::~JLog() {
     
 }
 
-void JLog::basePrint(const char *fmt, ...) {
-
-    va_list args;
-    va_start(args, fmt);
-    fprintf(stdout, fmt, args);
-    va_end(args);
-
+void JLog::basePrint(const char *fmt, va_list args) {
+    vfprintf(this->fd, fmt, args);
 }
+
+
 
 int JLog::initLog() {
 
     this->fileName = nullptr;
     this->type = LOG_TO_SCREEN; 
     this->level = LOG_ERR;
+    this->fd = stdout;
     return 0;
 }
 
@@ -55,12 +53,10 @@ void JLog::info(std::string fileName, std::string funcName, std::string lineNum,
     str = str + " " + " " + fmt;
     str = str + " " + "\n";
 
-
     va_list args;
     va_start(args, fmt);
     this->basePrint(str.c_str(), args);
     va_end(args);
-
 }
 
 void JLog::warning(std::string fileName, std::string funcName, std::string lineNum, const char *fmt, ...) {
@@ -72,7 +68,6 @@ void JLog::warning(std::string fileName, std::string funcName, std::string lineN
     str = str + " " + lineNum;
     str = str + " " + " " + fmt;
     str = str + " " + "\n";
-
 
     va_list args;
     va_start(args, fmt);
@@ -91,7 +86,6 @@ void JLog::error(std::string fileName, std::string funcName, std::string lineNum
     str = str + " " + " " + fmt;
     str = str + " " + "\n";
 
-    
     va_list args;
     va_start(args, fmt);
     this->basePrint(str.c_str(), args);
@@ -113,8 +107,4 @@ void JLog::fatal(std::string fileName, std::string funcName, std::string lineNum
     va_start(args, fmt);
     this->basePrint(str.c_str(), args);
     va_end(args);
-
 }
-
-
-

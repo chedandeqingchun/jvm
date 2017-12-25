@@ -3,7 +3,6 @@
 #include "load_class.h"
 using namespace std;
 
-
 classEntry::classEntry() {
 
     int16_t const_poll_count = 5;
@@ -12,15 +11,12 @@ classEntry::classEntry() {
 
 }
 
-
 classEntry::~classEntry() {
 
     delete this->const_poll;
     cout << "free class entry" << endl;
 
 }
-
-
 
 int classLoader::loadClass(std::string clsName) {
 
@@ -35,13 +31,4 @@ int classLoader::classParse() {
 
     return -1;
 }
-
-
-
-
-
-
-
-
-
 

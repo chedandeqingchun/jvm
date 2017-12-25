@@ -25,13 +25,14 @@ private:
     LogLevel level;
     const char *fileName;
     std::mutex lock;
+    FILE *fd;
 
 public:
     JLog();
     ~JLog();
 
     int initLog();
-    void basePrint(const char *fmt, ...); 
+    void basePrint(const char *fmt, va_list args); 
 
 
 public:
@@ -46,10 +47,10 @@ public:
 
 extern JLog log;
 
-#define JDebug(fmt, ...)  log.debug(__FILE__, __func__, std::to_string(__LINE__), ##__VA_ARGS__);
-#define JInfo(fmt, ...)  log.info(__FILE__, __func__, std::to_string(__LINE__), ##__VA_ARGS__);
-#define JFatal(fmt, ...)  log.fatal(__FILE__, __func__, std::to_string(__LINE__), ##__VA_ARGS__);
-#define JWarn(fmt, ...)  log.warning(__FILE__, __func__, std::to_string(__LINE__), ##__VA_ARGS__);
-#define JError(fmt, ...)  log.error(__FILE__, __func__, std::to_string(__LINE__), ##__VA_ARGS__);
+#define JDebug(fmt, ...)  log.debug(__FILE__, __func__, std::to_string(__LINE__), fmt, ##__VA_ARGS__);
+#define JInfo(fmt, ...)  log.info(__FILE__, __func__, std::to_string(__LINE__), fmt, ##__VA_ARGS__);
+#define JFatal(fmt, ...)  log.fatal(__FILE__, __func__, std::to_string(__LINE__), fmt, ##__VA_ARGS__);
+#define JWarn(fmt, ...)  log.warning(__FILE__, __func__, std::to_string(__LINE__), fmt, ##__VA_ARGS__);
+#define JError(fmt, ...)  log.error(__FILE__, __func__, std::to_string(__LINE__), fmt, ##__VA_ARGS__);
 
 #endif

@@ -1,7 +1,9 @@
 #include <iostream>
+#include <fstream>
 #include <getopt.h>
 
 #include "jvm_cli.h"
+#include "log.h"
 using namespace std;
 
 jvmArgsParse::jvmArgsParse () {
@@ -31,11 +33,11 @@ status jvmArgsParse::parse(int argc, char *argv[]) {
   static struct option long_options[] = {
     {"version", no_argument, NULL, 'v'},
     {"help", no_argument, NULL, 'h'},
-    {"path", 2, NULL, 'j'},
+    {"path", 2, NULL, 'x'},
     {0, 0, 0, 0}
   };
 
-  while (-1 != (opt = getopt_long(argc, argv, "vhj:", long_options, &option_index))) {
+  while (-1 != (opt = getopt_long(argc, argv, "vhx:", long_options, &option_index))) {
 
     switch (opt) {
       case 'v': {
@@ -48,7 +50,7 @@ status jvmArgsParse::parse(int argc, char *argv[]) {
         break;
       }
 
-      case 'j': {
+      case 'x': {
 
         if (!optarg) {
             cout << "optarg is empty" << endl;
@@ -82,6 +84,27 @@ status jvmArgsParse::startJvm() {
 
 status jvmArgsParse::loadClass(string clsName) {
 
+  std::string classPath = this->findClass(clsName);
+  JInfo("class path is %s", classPath.c_str());   
+
   this->loader.loadClass(clsName);
   return JVM_EC_OK;
+}
+
+std::string jvmArgsParse::findClass(string clsName) {
+
+    std::set<string>::iterator iter = this->lookingPath.begin();
+
+    while (iter != this->lookingPath.end()) {
+
+        std::ifstream inFile((*iter + "/" +  clsName).c_str());       
+
+        if (bool(inFile) == true) {
+            return *iter + clsName;
+        }
+
+        iter++;
+    }
+
+    return "11223344";
 }

@@ -28,7 +28,8 @@ public:
   ~jvmArgsParse ();
   status parse(int argc, char *argv[]);
   status startJvm();
-  status loadClass(string clsName);
+  status loadClass(std::string clsName);
+  std::string findClass(std::string clsName);
 
 };
 
